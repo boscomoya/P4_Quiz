@@ -58,6 +58,9 @@ case 'add':
         case 'test':
             cmds.testCmd(rl,args[1]);
             break;
+        case 'credits':
+            cmds.creditsCmd(rl);
+            break;
 
 default:
     log(`no existe este comando '${colorize(cmd, 'red')}'`);
