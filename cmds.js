@@ -112,3 +112,8 @@ exports.testCmd = (rl,id) => {
         }
     }
 };
+exports.creditsCmd = rl =>{
+    console.log("Autor de la práctica: ");
+    log(" PABLO Bosco Moya Rodriguez","blue");
+    rl.prompt();
+}
