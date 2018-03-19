@@ -129,7 +129,7 @@ exports.playCmd = rl => {
     }else{
         let d = Math.round(Math.random()*toBeResolved.length);
         let quiz = model.getByIndex(d);
-        toBeResolved[toBeResolved.filter(elem => elem != d)];
+        
 
         rl.question("¿"+quiz.question+"? ",answer => {
             if( answer.toLowerCase().trim() === quiz.answer.toLowerCase().trim()){
@@ -137,6 +137,7 @@ exports.playCmd = rl => {
             log('Correcto','green');
             score=score+1;
             console.log(`"su puntuacion es de :"${score}`);
+            toBeResolved=toBeResolved.filter(elem => elem != d);    
             playOne();
         }else{
             log("Su respuesta es incorrecta ","red");
