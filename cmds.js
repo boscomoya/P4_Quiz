@@ -114,10 +114,16 @@ exports.testCmd = (rl,id) => {
     }
 };
 exports.playCmd = rl => {
+
+    const generar = () => {
+        let d = Math.round(Math.random()*toBeResolved.length);
+    }
+
     let score = 0;
     let toBeResolved = [];
-    for ( let i = 0; i <  4;++i){
+    for ( let i = 0; i < 4 ;++i){
        toBeResolved.push(i);
+
     };
     const playOne = () =>{
 
@@ -127,29 +133,39 @@ exports.playCmd = rl => {
 
         rl.prompt();
     }else{
+
+
         let d = Math.round(Math.random()*toBeResolved.length);
-        let quiz = model.getByIndex(d);
-        toBeResolved = toBeResolved.filter(elem => elem != d); 
-
-        rl.question("¿"+quiz.question+"? ",answer => {
-            if( answer.toLowerCase().trim() === quiz.answer.toLowerCase().trim()){
-            log("Su respuesta es correcta ","green");
-            log('Correcto','green');
-            score=score+1;
-            console.log(`"su puntuacion es de :"${score}`);
-         
-            playOne();
-        }else{
-            log("Su respuesta es incorrecta ","red");
-            console.log(`"su puntuacion es de :"${score}`);
-            rl.prompt();
-            }
+        for ( let i = 0; i < toBeResolved.length ;++i) {
+            if (toBeResolved[i] !== d) {
+               generar;
+            } else {
+                let quiz = model.getByIndex(d);
+                toBeResolved = toBeResolved.filter(elem => elem != d);
 
 
+                rl.question("¿" + quiz.question + "? ", answer => {
+                    if(answer.toLowerCase().trim() === quiz.answer.toLowerCase().trim()
+            )
+                {
+                    log("Su respuesta es correcta ", "green");
+                    log('Correcto', 'green');
+                    score = score + 1;
+                    console.log(`"su puntuacion es de :"${score}`);
+                    playOne();
+                }
+            else
+                {
+                    log("Su respuesta es incorrecta ", "red");
+                    console.log(`"su puntuacion es de :"${score}`);
+                    rl.prompt();
+                }
 
 
-    });
+            });
 
+            };
+        };
 };
     };
     playOne();
