@@ -42,10 +42,11 @@ exports.showCmd = (rl,id) => {
 };
 
 exports.addCmd = rl => {
-    rl.question(colorize('Introduzca una pregunta: ', 'red'),question => {
-        rl.question(colorize(' Introduzca la respuesta ','red'),answer => {
-            model.add(question, answer);
-            log(` ${colorize('se ha añadido', 'magenta')}: ${question} ${colorize('=>','magenta')} ${answer}`);
+    rl.question(colorize('Introduzca una pregunta: ', 'red'), question => {
+
+        rl.question(colorize(' Introduzca la respuesta ','red'), answer => {
+           model.add(question, answer);
+           log(` ${colorize('se ha añadido', 'magenta')}: ${question} ${colorize('=>','magenta')} ${answer}`);
             rl.prompt();
          });
     });
@@ -112,6 +113,46 @@ exports.testCmd = (rl,id) => {
         }
     }
 };
+exports.playCmd = rl => {
+    let score = 0;
+    let toBeResolved = [];
+    for ( let i = 0; i <  4;++i){
+       toBeResolved.push(i);
+    };
+    const playOne = () =>{
+
+
+    if (toBeResolved.length === 0){
+        log("no hay nada que preguntar","red");
+
+        rl.prompt();
+    }else{
+        let d = Math.round(Math.random()*toBeResolved.length);
+        let quiz = model.getByIndex(d);
+        toBeResolved[toBeResolved.filter(elem => elem != d)];
+
+        rl.question("¿"+quiz.question+"? ",answer => {
+            if( answer.toLowerCase().trim() === quiz.answer.toLowerCase().trim()){
+            log("Su respuesta es correcta ","green");
+            log('Correcto','green');
+            score=score+1;
+            console.log(`"su puntuacion es de :"${score}`);
+            playOne();
+        }else{
+            log("Su respuesta es incorrecta ","red");
+            console.log(`"su puntuacion es de :"${score}`);
+            rl.prompt();
+            }
+
+
+
+
+    });
+
+};
+    };
+    playOne();
+} ;
 exports.creditsCmd = rl =>{
     console.log("Autor de la práctica: ");
     log(" PABLO Bosco Moya Rodriguez","blue");
