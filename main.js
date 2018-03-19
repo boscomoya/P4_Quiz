@@ -61,6 +61,10 @@ case 'add':
         case 'credits':
             cmds.creditsCmd(rl);
             break;
+        case 'p':
+        case 'play':
+            cmds.playCmd(rl);
+            break;
 
 default:
     log(`no existe este comando '${colorize(cmd, 'red')}'`);
