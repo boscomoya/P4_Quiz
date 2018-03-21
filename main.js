@@ -49,6 +49,7 @@ case 'add':
         case 'add':
             cmds.addCmd(rl);
             break;
+
         case 'delete':
             cmds.deleteCmd(rl,args[1]);
             break;
